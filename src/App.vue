@@ -4,7 +4,7 @@
   </header>
   <ap-table
     :columns="columns"
-    :rows="formattedPeople"
+    :rows="people"
   />
   <main class="container mx-auto">
     <add-person-form
@@ -43,19 +43,6 @@ export default defineComponent({
       columns: cloneDeep(DATA_COLUMNS),
       people: cloneDeep(DATA_ROWS),
     }
-  },
-  computed: {
-    formattedPeople() {
-      return this.people.map((person: People) => {
-        return {
-          ...person,
-          amount: new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-          }).format(person.amount),
-        }
-      })
-    },
   },
   methods: {
     addPerson(person: People) {

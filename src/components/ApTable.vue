@@ -18,7 +18,7 @@
         class="bg-white border-b"
       >
         <td class="px-6 py-4">{{ row.name }}</td>
-        <td class="px-6 py-4">{{ row.amount }}</td>
+        <td class="px-6 py-4">{{ formatAmount(row.amount) }}</td>
       </tr>
     </tbody>
   </table>
@@ -38,6 +38,14 @@ export default defineComponent({
     rows: {
       type: Array as PropType<Array<People>>,
       required: true,
+    },
+  },
+  methods: {
+    formatAmount(amount: number) {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      }).format(amount);
     },
   },
 })

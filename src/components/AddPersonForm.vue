@@ -12,8 +12,7 @@
         Name
         <input
           v-model="name"
-          type="text"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          class="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         />
       </label>
       <label
@@ -22,9 +21,8 @@
       >
         Amount
         <input
-          v-model.number="amount"
-          type="number"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          v-model="amount"
+          class="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         />
       </label>
       <button
@@ -46,13 +44,18 @@ export default defineComponent({
   data() {
     return {
       name: '',
-      amount: 0,
+      amount: '',
     }
   },
   methods: {
     onSubmit() {
-      if (!this.name) {
-        alert('Please enter a name');
+      if (!this.name || !this.amount) {
+        alert('Please fill in all fields');
+        return;
+      }
+
+      if (isNaN(Number(this.amount))) {
+        alert('Please enter a valid number');
         return;
       }
 
@@ -62,7 +65,7 @@ export default defineComponent({
         amount: this.amount,
       });
       this.name = '';
-      this.amount = 0;
+      this.amount = '';
     },
   },
 });
