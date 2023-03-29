@@ -21,8 +21,20 @@ import AddPersonForm from './components/AddPersonForm.vue'
 import { Columns, People } from './types/People';
 
 const DATA_COLUMNS: Array<Columns> = [
-  { key: 'name', label: 'Name' },
-  { key: 'amount', label: 'Amount' },
+  {
+    key: 'name',
+    label: 'Name',
+  },
+  {
+    key: 'amount',
+    label: 'Amount',
+    formatter: (value: number) => {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      }).format(value);
+    },
+  },
 ];
 
 const DATA_ROWS: Array<People> = [

@@ -17,8 +17,13 @@
         :key="row.id"
         class="bg-white border-b"
       >
-        <td class="px-6 py-4">{{ row.name }}</td>
-        <td class="px-6 py-4">{{ formatAmount(row.amount) }}</td>
+        <td
+          v-for="col in columns"
+          class="px-6 py-4"
+          :key="col.key"
+        >
+          {{ col.formatter ? col.formatter(row[col.key]) : row[col.key] }}
+        </td>
       </tr>
     </tbody>
   </table>
